@@ -3,7 +3,7 @@
 SHOW databases.
 
 --2-- Créer une base de données SQL nommée HARIBO
-CREATE databases `èHaribo`,
+CREATE databases `Haribo`,
  id_user ID HARIBO;
 
 
@@ -20,7 +20,7 @@ CREATE TABLE:user(
 id INT AUTO_INCREMENT PRIMARY KEY;
 name VARCHAR(100);
 color_eyes VARCHAR(30);
- gender VARCHAR(homme,femme,autre);
+gender VARCHAR(homme,femme,autre);
 );
 
 INSERT INTO client (prenom, nom, ville, age);
@@ -174,108 +174,156 @@ CREATE TABLE `eat`(
 
 
  insérer dans la table eat des informations sur qui a consommé quel bonbon, quand et dans quelles quantités (données ci-dessous) :
+ INSERT INTO `eat` ( `id_user`,`id_candy`,`date_eat`, `quantity` )
+VALUES
 (4,7,'2025-08-20', 5),
-INSERT INTO user (`4,7,'2025-08-20, 5`);
+INSERT INTO user (`4,7,'2025-08-20,5`);
 (1,1,'2025-08-05', 5),
-INSERT INTO user(`1,1,2025-08-05, 5`);
+INSERT INTO user(`1,1,2025-08-05,5`);
 (1,1,'2025-08-05', 5),
-INSERT INTO user(`(1,1,'2025-08-05',5`);
+INSERT INTO user(`1,1,'2025-08-05',5`);
 (3,3,'2025-08-04', 5),
-INSERT INTO user
+INSERT INTO user3(`3,2025-08-04',5`);
 (5,4,'2025-08-15', 5),
-INSERT INTO user
+INSERT INTO user(`5,4,'2025-08-15',5`);
 (6,5,'2025-08-18', 5),
-INSERT INTO user
+INSERT INTO user(`6,5,'2025-08-18',5`);
 (7,6,'2025-08-22', 5),
-INSERT INTO user
+INSERT INTO user(`7,6,'2025-08-22',5`)
 (8,8,'2025-08-19', 5),
-INSERT INTO user
+INSERT INTO user(`8,8,'2025-08-19' 5`);
 (9,9,'2025-08-21', 5),
-INSERT INTO user
+INSERT INTO user(`9,9,'2025-08-21',5`);
 (10,10,'2025-08-01',5),
-INSERT INTO user
-(11,11,'2025-08-01', 5)
-INSERT INTO user
+INSERT INTO user(`10,10,'2025-08-01',5`);
+(11,11,'2025-08-01',5)
+INSERT INTO user(`11,11,'2025-08-01',5`);
 
 
-9- Lister les tables de la BDD *Haribo*
-
-
+9- Lister les tables de la BDD *Haribo*;
+SHOW TABLES;
+ 
 10- voir les colones de la table *candy*
+SHOW COLUMNS FROM `candy`;
 11- Sélectionner tous les champs de tous les enregistrements de la table *user*
+SELECT * FROM  `user`; 
 
 
-12- Rajouter un nouveau user *Patriiiick* en forçant la numérotation de l id par la valeur 150
+12- Rajouter un nouveau user *Patriiiick* en forçant la numérotation de l id par la valeur 150;
+
+INSERT INTO `user` (`id_user`, `name`,`color_eyes`, `gender`) 
+VALUES (150,'patriiiick', 'noir', 'h');
 
 13- Rajouter un nouveau user *Mila* SANS forcer la numérotation de  id
-
+INSERT INTO `user` (`name`,`color_eyes`,`gender`)
+VALUES
+('Mila','pourpre','a');
 
 14  Changer le prénom du user qui a  id 150 de *Patriiiick* à *Patrick*
-
+INSERT INTO `user` (`name`,`color_eyes`,`gender`)
+VALUES
+('Mila','pourpre','a');
 
 --15--Rajouter dans la table eat que Patrick a mangé 5 Tagada purpule le 15 septembre 2023
-
-
+UPDATE `user`
+SET `name`= 'Patrick'
+WHERE `id_user` = 150;
 --16-- Sélectionner tous les noms des bonbons
-
+SELECT `name`
+FROM `candy`;
 
 --17-- Sélectionner tous les noms des bonbons en enlevant les doublons
 
+INSERT INTO `candy` (`name`, `flavor` )
+VALUES
+('dragibus', 'fraise');
 
+SELECT DISTINCT `name`
+FROM `candy`;
 --18-- Récupérer les couleurs des yeux des users (Sélectionner plusieurs champs dans une table)
+SELECT `name`, `color_eyes`
+FROM `user`;
+19-Dédoublonner un résultat sur plusieurs champs
 
+FROM `user`
+GROUP BY `color_eyes`;
 
---19-- Dédoublonner un résultat sur plusieurs champs
+SELECT DISTINCT name, color_eyes
+FROM user;
 
+-20- Sélectionner l'user qui a l'id 5
+SELECT `name` FROM `user` WHERE `id_user`=5;
 
---20-- Sélectionner l'user qui a l'id 5
+-21- Sélectionner tous les users qui ont les yeux marrons
+SELECT * FROM `user` WHERE `color_eyes` = 'marron';
 
-
---21-- Sélectionner tous les users qui ont les yeux marrons
-
-
---22-- Sélectionner tous les users dont l'id est plus grand que 9
-
+22- Sélectionner ous les users dont l'id est plus grand que 9;
+SELECT * FROM `user` WHERE `id_user`> 9;
 
 --23-- Sélectionner tous les users SAUF celui dont l'id est 13 (soyons supersticieux !) :!\ il y a 2 façons de faire
+SELECT * FROM `user` WHERE `id_user` != 5
 
 --24-- Sélectionner tous les users qui ont un id inférieur ou égal à 10
-
+SELECT * FROM `user` WHERE `id_user` <= 10;
 
 --25-- Sélectionner tous les users dont l'id est compris entre 7 et 11
+SELECT *
+FROM `user`
+WHERE `id_user` BETWEEN 7 AND 11;
 
+SELECT *
+FROM `user`
+WHERE `id_user` >= 7 AND `id_user` <= 11;
 
---26-- Sélectionner les users dont le prénom commence par un *S*
-
+--26-- Sélectionner les users dont le prénom commence par un *p*
+SELECT * FROM `user` WHERE `name` LIKE 'p%';
 
 --27-- Trier les users femmes par id décroissant
-
+SELECT * FROM `user` WHERE `gender` ='f' ORDER BY `id_user` DESC;
 
 --28-- Trier les users hommes par prénom dans l'ordre alphabétique
+SELECT * FROM `user` WHERE `gender` = 'h' ORDER BY `name` ASC;
 
 
 --29-- Trier les users en affichant les femmes en premier et en classant les couleurs des yeux dans l'ordre alphabétique
+SELECT `name`, `color_eyes`
+FROM `user`
+ORDER BY FIELD (`gender`, 'f', 'h', 'a'), `color_eyes` ASC;
+
+SELECT `name`, `color_eyes`
+FROM `user`
+ORDER BY `gender` ASC, `color_eyes` ASC;
 
 
 --30-- Limiter l'affichage d'une requête de sélection de tous les users aux 3 premires résultats
-
+SELECT * FROM `user`
+LIMIT 3;
 
 --31-- Limiter l'affichage d'une requête de sélection de tous les users à partir du 3ème résultat et des 5 suivants
-
+SELECT * FROM `user`
+LIMIT 3, 5;
+--ou--
+SELECT * FROM `user` LIMIT 5 OFFSET 3;
 
 --32-- Afficher les 4 premiers users qui ont les yeux marron
 
-
+SELECT * FROM `user` WHERE `color_eyes` = 'marron' LIMIT 4;
 --33-- Pareil mais en triant les prénoms dans l'ordre alphabétique
 
-
+SELECT * FROM `user` WHERE `color_eyes` = 'marron' ORDER BY `name` ASC LIMIT 4;
 --34-- Compter le nombre de users
 
+SELECT COUNT(*) FROM `user`;
 
 --35-- Compter le nombre de users hommes mais en changeant le nom de la colonne de résultat par *nb_users_H*
-
+SELECT COUNT(*) AS `nb_users_H`
+FROM `user`
+WHERE `gender`='h';
 
 --36-- Compter le nombre de couleurs d'yeux différentes
+ELECT COUNT(*) AS `nb_users_H`
+FROM `user`
+WHERE `gender`='h';
 
 
 --37-- Afficher le prénom et les yeux du user qui a l'id le plus petit
@@ -318,4 +366,6 @@ INSERT INTO user
 --49-- Afficher les saveurs des bonbons (sans doublons)
 
 
---50-- Afficher le prénom du user qui a mangé le plus de bonbons
+--50-- Afficher le prénom du user qui a mangé le plus de bonbonsELECT COUNT(*) AS `nb_users_H`
+FROM `user`
+WHERE `gender`='h';
